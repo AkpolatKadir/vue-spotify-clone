@@ -1,39 +1,51 @@
 <template>
   <section class="navbar">
-    <NavBarIcon width="131" height="40" />
+    <img class="navbar-icon" />
 
     <ul class="mainNavList">
-      <li>
-        <a class="mainNavList-item">
-          <div class="mainNavList-icon"></div>
-          <div class="mainNavList-text">Home</div>
-        </a>
-      </li>
-      <li>
-        Search
-      </li>
-      <li>
-        Your Library
-      </li>
+      <NavigationButton
+        v-for="(navItem, index) in navbarList"
+        v-bind:key="index"
+        v-bind:nav-item="navItem"
+      ></NavigationButton>
     </ul>
+
+    <NavBarPlayList />
   </section>
 </template>
 
 <script>
-import NavBarIcon from "./TheNavBarIcon.vue";
+import NavBarPlayList from "./NavBarPlayList.vue";
+import NavigationButton from "./NavigationButton.vue";
 
 export default {
   name: "NavBar",
-  components: { NavBarIcon },
+  components: { NavigationButton, NavBarPlayList },
+  data: function() {
+    return {
+      navbarList: [
+        { text: "Home", iconModifier: "home" },
+        { text: "Search", iconModifier: "search" },
+        { text: "Your Library", iconModifier: "library" },
+      ],
+    };
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .navbar {
   background-color: black;
   height: 100%;
+  padding-left: 24px;
+
+  &-icon {
+    mask: url("../assets/icons/logo.svg");
+  }
 }
 .mainNavList {
-  margin: 0;
+  display: grid;
+  grid-template-rows: repeat(3, 40px);
+  margin-bottom: 20px;
 }
 </style>
