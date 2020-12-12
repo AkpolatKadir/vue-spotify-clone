@@ -10,17 +10,17 @@
       ></NavigationButton>
     </ul>
 
-    <NavBarPlayList />
+    <NavBarPlaylist />
   </section>
 </template>
 
 <script>
-import NavBarPlayList from "./NavBarPlayList.vue";
+import NavBarPlaylist from "./TheNavBarPlaylist.vue";
 import NavigationButton from "./NavigationButton.vue";
 
 export default {
   name: "NavBar",
-  components: { NavigationButton, NavBarPlayList },
+  components: { NavigationButton, NavBarPlaylist },
   data: function() {
     return {
       navbarList: [
