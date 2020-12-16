@@ -1,5 +1,5 @@
 <template>
-  <div class="albumCover">
+  <div class="albumCover" :class="`albumCover--${classModifier}`">
     <img v-bind:src="src" />
   </div>
 </template>
@@ -9,13 +9,23 @@ export default {
   name: "AlbumCover",
   props: {
     src: String,
+    classModifier: String,
   },
 };
 </script>
 
-<style>
+<style lang="scss">
 .albumCover {
-  max-height: 192px;
-  max-width: 192px;
+  display: inline-block;
+  img {
+    min-height: 192px;
+    min-width: 192px;
+    max-height: 232px;
+    max-width: 232px;
+  }
+
+  &--shadowBlack {
+    box-shadow: 0px 5px 10px 10px rgba(0, 0, 0, 0.5);
+  }
 }
 </style>

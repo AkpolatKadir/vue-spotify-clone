@@ -16,7 +16,11 @@
     <hr />
 
     <ul class="userPlaylists">
-      <li v-for="(playlist, index) in playlists" :key="index">
+      <li
+        class="userPlaylists-item"
+        v-for="(playlist, index) in playlists"
+        :key="index"
+      >
         <a>
           <span>{{ playlist.name }}</span>
         </a>
@@ -105,5 +109,11 @@ hr {
   color: #b3b3b3;
   font-size: 14px;
   font-weight: 400;
+
+  &-item {
+    &:hover {
+      color: white;
+    }
+  }
 }
 </style>
