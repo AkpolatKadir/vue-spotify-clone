@@ -1,9 +1,6 @@
 <template>
   <a class="navigationButton" href>
-    <img
-      class="navigationButton-icon"
-      :class="`navigationButton-icon--${navItem.iconModifier}`"
-    />
+    <i v-if="navItem.iconName" :class="`${navItem.iconName}`" />
     <div class="navigationButton-text">
       {{ navItem.text }}
     </div>
@@ -40,24 +37,8 @@ export default {
     color: white;
   }
 
-  &-icon {
-    height: 24px;
-    width: 24px;
+  i {
     margin-right: 10px;
-    background-color: #b3b3ae;
-
-    &--home {
-      mask: url("../assets/icons/home.svg");
-    }
-    &--search {
-      mask: url("../assets/icons/search.svg");
-    }
-    &--library {
-      mask: url("../assets/icons/library.svg");
-    }
-    &--heart {
-      mask: url("../assets/icons/heart.svg");
-    }
   }
 
   &-text {

@@ -31,4 +31,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+.fa-2x {
+  font-size: 1.5em;
+}
 </style>

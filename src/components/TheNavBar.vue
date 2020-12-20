@@ -1,5 +1,5 @@
 <template>
-  <section class="navbar">
+  <nav class="navbar">
     <img class="navbar-icon" />
 
     <ul class="mainNavList">
@@ -11,7 +11,7 @@
     </ul>
 
     <NavBarPlaylist />
-  </section>
+  </nav>
 </template>
 
 <script>
@@ -21,12 +21,12 @@ import NavigationButton from "./NavigationButton.vue";
 export default {
   name: "NavBar",
   components: { NavigationButton, NavBarPlaylist },
-  data: function() {
+  data: function () {
     return {
       navbarList: [
-        { text: "Home", iconModifier: "home" },
-        { text: "Search", iconModifier: "search" },
-        { text: "Your Library", iconModifier: "library" },
+        { text: "Home", iconName: "fas fa-home fa-2x" },
+        { text: "Search", iconName: "fas fa-search fa-2x" },
+        { text: "Your Library", iconName: "fas fa-book fa-2x" },
       ],
     };
   },
@@ -40,7 +40,6 @@ export default {
   padding-left: 24px;
 
   &-icon {
-    mask: url("../assets/icons/logo.svg");
   }
 }
 .mainNavList {

@@ -4,12 +4,12 @@
 
     <div class="actionButtonList">
       <button class="createPlaylistButton">
-        <img class="createPlaylistButton-icon" />
+        <i class="far fa-plus-square fa-2x" />
         <span class="createPlaylistButton-text">Create Playlist</span>
       </button>
 
       <NavigationButton
-        :nav-item="{ text: 'Liked Songs', iconModifier: 'heart' }"
+        :nav-item="{ text: 'Liked Songs', iconName: 'far fa-heart fa-2x' }"
       />
     </div>
 
@@ -36,7 +36,7 @@ import mockPlaylists from "../assets/mockPlaylists";
 export default {
   name: "TheNavBarPlaylist",
   components: { NavigationButton },
-  data: function() {
+  data: function () {
     return { playlists: mockPlaylists };
   },
 };
@@ -77,12 +77,8 @@ export default {
     color: white;
   }
 
-  &-icon {
-    height: 24px;
-    width: 24px;
+  i {
     margin-right: 10px;
-    background-color: #b3b3ae;
-    mask: url("../assets/icons/plus.svg");
   }
   &-text {
     font-size: 14px;
