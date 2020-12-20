@@ -10,7 +10,7 @@ import AlbumPage from "./pages/AlbumPage.vue";
 
 const router = new VueRouter({
   routes: [{ path: "/", component: AlbumPage, name: "album" }],
-  mode: "history",
+  mode: "hash",
 });
 
 new Vue({
