@@ -9,7 +9,7 @@ Vue.config.productionTip = false;
 import AlbumPage from "./pages/AlbumPage.vue";
 
 const router = new VueRouter({
-  routes: [{ path: "/", component: AlbumPage, name: "album" }],
+  routes: [{ path: "/album/:id", component: AlbumPage, name: "album" }],
   mode: "hash",
 });
 

@@ -22,7 +22,9 @@
         :key="index"
       >
         <a>
-          <span>{{ playlist.name }}</span>
+          <span @click="navigateToAlbum(playlist.strRateYourMusicID)">{{
+            playlist.strAlbum
+          }}</span>
         </a>
       </li>
     </ul>
@@ -32,6 +34,7 @@
 <script>
 import NavigationButton from "./NavigationButton.vue";
 import mockPlaylists from "../assets/mockPlaylists";
+import axios from "axios";
 
 export default {
   name: "TheNavBarPlaylist",
@@ -39,12 +42,26 @@ export default {
   data: function () {
     return { playlists: mockPlaylists };
   },
+  methods: {
+    async doQuery(url) {
+      const res = await axios.get(url);
+      this.playlists = res.data.album;
+    },
+    navigateToAlbum(albumId) {
+      this.$router.push(`/album/${albumId}`);
+    },
+  },
+  created() {
+    this.doQuery(
+      "https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=queen"
+    );
+  },
 };
 </script>
 
 <style lang="scss">
 .playlist {
-  height: 100%;
+  height: 500px;
 
   &-header {
     font-weight: 700;
