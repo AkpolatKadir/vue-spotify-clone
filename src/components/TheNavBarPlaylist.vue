@@ -33,27 +33,23 @@
 
 <script>
 import NavigationButton from "./NavigationButton.vue";
-import axios from "axios";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "TheNavBarPlaylist",
   components: { NavigationButton },
-  data: function () {
-    return { playlists: [] };
-  },
+  computed: mapState({
+    playlists: (state) => state.album.playlists,
+  }),
   methods: {
-    async fetchPlaylist(url) {
-      const res = await axios.get(url);
-      this.playlists = res.data.album;
-    },
     navigateToAlbum(albumId) {
       this.$router.push(`/album/${albumId}`);
     },
+    ...mapActions(["fetchPlaylists"]),
   },
   created() {
-    this.fetchPlaylist(
-      "https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=queen"
-    );
+    const band = "queen"; // TODO: Make this variable dynamic.
+    this.$store.dispatch("fetchPlaylists", band);
   },
 };
 </script>

@@ -1,15 +1,18 @@
 <template>
   <section class="album">
     <div class="album-details">
-      <AlbumCover :src="albumCover" classModifier="shadowBlack" />
+      <AlbumCover
+        :src="albumDetail.strAlbumCDart"
+        classModifier="shadowBlack"
+      />
 
       <h1 class="album-detailTexts">
-        <span class="album-name"> {{ albumName }} </span>
+        <span class="album-name"> {{ albumDetail.strAlbum }} </span>
         <span class="album-meta">
           <ul class="album-artists">
             <span
               class="album-artist"
-              v-for="(artist, index) in artists"
+              v-for="(artist, index) in [albumDetail.strArtistStripped]"
               :key="index"
               >{{ artist }}</span
             >
@@ -42,34 +45,14 @@
 
 <script>
 import AlbumCover from "../components/AlbumCover";
-import axios from "axios";
 
 export default {
   name: "AlbumPage",
   components: { AlbumCover },
-  data: function () {
-    return { albumCover: "", albumName: "", artists: [] };
-  },
-  methods: {
-    async fetchAlbum(albumId) {
-      const res = await axios.get(
-        `https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=queen&a=${albumId}`
-      );
-      const albumData = res.data.album[0];
-      this.albumCover = albumData.strAlbumCDart;
-      this.albumName = albumData.strAlbum;
-      this.artists = [albumData.strArtistStripped];
+  computed: {
+    albumDetail() {
+      return this.$store.getters.getAlbumDetailById(this.$route.params.id);
     },
-  },
-  watch: {
-    $route() {
-      const albumId = this.$route.params.id;
-      this.fetchAlbum(albumId);
-    },
-  },
-  created() {
-    const albumId = this.$route.params.id;
-    this.fetchAlbum(albumId);
   },
 };
 </script>

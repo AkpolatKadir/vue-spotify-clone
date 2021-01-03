@@ -1,19 +1,20 @@
 import Vue from "vue";
+import VueRouter from "vue-router";
 import App from "./App.vue";
 import "reset-css";
-import VueRouter from "vue-router";
+import store from "./store";
+import routes from "./routes";
 
-Vue.use(VueRouter);
 Vue.config.productionTip = false;
-
-import AlbumPage from "./pages/AlbumPage.vue";
+Vue.use(VueRouter);
 
 const router = new VueRouter({
-  routes: [{ path: "/album/:id", component: AlbumPage, name: "album" }],
+  routes,
   mode: "hash",
 });
 
 new Vue({
   render: (h) => h(App),
   router,
+  store,
 }).$mount("#app");
