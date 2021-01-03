@@ -33,17 +33,16 @@
 
 <script>
 import NavigationButton from "./NavigationButton.vue";
-import mockPlaylists from "../assets/mockPlaylists";
 import axios from "axios";
 
 export default {
   name: "TheNavBarPlaylist",
   components: { NavigationButton },
   data: function () {
-    return { playlists: mockPlaylists };
+    return { playlists: [] };
   },
   methods: {
-    async doQuery(url) {
+    async fetchPlaylist(url) {
       const res = await axios.get(url);
       this.playlists = res.data.album;
     },
@@ -52,7 +51,7 @@ export default {
     },
   },
   created() {
-    this.doQuery(
+    this.fetchPlaylist(
       "https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=queen"
     );
   },
@@ -124,6 +123,8 @@ hr {
   font-weight: 400;
 
   &-item {
+    cursor: pointer;
+
     &:hover {
       color: white;
     }

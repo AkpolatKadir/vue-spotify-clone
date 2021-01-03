@@ -51,7 +51,7 @@ export default {
     return { albumCover: "", albumName: "", artists: [] };
   },
   methods: {
-    async doQuery(albumId) {
+    async fetchAlbum(albumId) {
       const res = await axios.get(
         `https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=queen&a=${albumId}`
       );
@@ -64,12 +64,12 @@ export default {
   watch: {
     $route() {
       const albumId = this.$route.params.id;
-      this.doQuery(albumId);
+      this.fetchAlbum(albumId);
     },
   },
-  async created() {
+  created() {
     const albumId = this.$route.params.id;
-    this.doQuery(albumId);
+    this.fetchAlbum(albumId);
   },
 };
 </script>
