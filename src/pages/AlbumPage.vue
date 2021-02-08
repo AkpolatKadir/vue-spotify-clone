@@ -29,14 +29,18 @@
       </div>
 
       <div class="album-musics">
-        <hr />
-        <div class="album-music">
-          <div class="album-musicNumber">1</div>
+        <div
+          class="album-music"
+          v-for="(track, trackIndex) in tracks"
+          :key="trackIndex"
+        >
+          <div class="album-musicNumber">{{ trackIndex }}</div>
           <div class="album-musicName">
-            <div>Corposeduction</div>
-            <div>Marcin</div>
+            <div>{{ track.strTrack }}</div>
           </div>
-          <div class="album-musicDuration">4:26</div>
+          <div class="album-musicDuration">
+            {{ getDurationFormatted(track.intDuration) }}
+          </div>
         </div>
       </div>
     </div>
@@ -45,6 +49,7 @@
 
 <script>
 import AlbumCover from "../components/AlbumCover";
+import convertMsToMinutes from "../utils/convertMsToMinutes";
 
 export default {
   name: "AlbumPage",
@@ -52,6 +57,23 @@ export default {
   computed: {
     albumDetail() {
       return this.$store.getters.getAlbumDetailById(this.$route.params.id);
+    },
+    tracks() {
+      return this.$store.getters.getTracksByAlbumId(this.albumId);
+    },
+  },
+  methods: {
+    getDurationFormatted(duration) {
+      const convertedDuration = convertMsToMinutes(duration);
+      return `${convertedDuration.minutes}:${convertedDuration.seconds}`;
+    },
+  },
+  watch: {
+    albumDetail: function (val) {
+      if (val.idAlbum) {
+        this.$store.dispatch("fetchTracksOfAlbum", val.idAlbum);
+        this.albumId = val.idAlbum;
+      }
     },
   },
 };
@@ -108,6 +130,7 @@ export default {
   background-color: black;
   padding-left: 20px;
   padding-top: 20px;
+  height: calc(100vh - 400px);
 }
 
 .album-buttons {
@@ -125,6 +148,8 @@ export default {
 .album-musics {
   display: grid;
   grid-auto-rows: 56px;
+  overflow-y: auto;
+  height: 100%;
 }
 .album-music {
   display: flex;

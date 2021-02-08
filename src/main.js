@@ -4,6 +4,9 @@ import App from "./App.vue";
 import "reset-css";
 import store from "./store";
 import routes from "./routes";
+import axios from "axios";
+
+axios.defaults.baseURL = "https://www.theaudiodb.com/api/v1/json/1";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
