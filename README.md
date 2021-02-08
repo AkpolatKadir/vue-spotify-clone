@@ -1,9 +1,6 @@
 # Spotify Clone
 
-This is a hobby project.
-A spotify design clone that I created while I am learning Vue.js.
-The albums and tracks are fetched from https://theaudiodb.com api.
-Implements vuex as data store.
+This is a hobby project. A Spotify design clone that I created while I am learning Vue.js. The albums and tracks are fetched from https://theaudiodb.com API. Implements vuex as the data store.
 
 ## Project setup
 
